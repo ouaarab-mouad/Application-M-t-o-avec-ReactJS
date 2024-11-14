@@ -45,43 +45,49 @@ if (event.key === 'Enter') {
         }
 };
 return (
-<div className="App">
-<h1 className="app-name">Application Météo grp204</h1>
-<div className="search-bar">
-<input
-type="text"
-className="city-search"
-placeholder="Entrez le nom de la ville..."
-name="query"
-value={input}
-onChange={(event) => setInput(event.target.value)}
-onKeyPress={search}
-/>
-</div>
-{weather.loading && (
-<>
-<Oval type="Oval" color="black" height={100} width={100} />
-</>
-)}
-{weather.error && (
-<>
-<span className="error-message">
-<FontAwesomeIcon icon={faFrown} />
-<span>Ville introuvable</span>
-</span>
-</>
-)}
-{weather && weather.data && weather.data.main && (
-<div>
-<h2>{weather.data.name}, {weather.data.sys.country}</h2>
-<span>{toDateFunction()}</span>
-<img src={`https://openweathermap.org/img/wn/${weather.data.weather[0].icon}@2x.png`}
-alt={weather.data.weather[0].description} />
-<p>{Math.round(weather.data.main.temp)}°C</p>
-<p>Vitesse du vent : {weather.data.wind.speed} m/s</p>
-</div>
-)}
-</div>
-);
+    <div className="App">
+      <h1 className="app-name">Application Météo grp204</h1>
+      <div className="search-bar">
+        <input
+          type="text"
+          className="city-search"
+          placeholder="Entrez le nom de la ville..."
+          name="query"
+          value={input}
+          onChange={(event) => setInput(event.target.value)}
+          onKeyPress={search}
+        />
+      </div>
+      
+      {/* Loading Spinner */}
+      {weather.loading && (
+        <div className="loading-spinner">
+          <Oval type="Oval" color="black" height={100} width={100} />
+        </div>
+      )}
+  
+      {/* Error Message */}
+      {weather.error && (
+        <div className="error-message">
+          <FontAwesomeIcon icon={faFrown} />
+          <span>Ville introuvable</span>
+        </div>
+      )}
+  
+      {/* Weather Info Display */}
+      {weather && weather.data && weather.data.main && (
+        <div className="weather-info">
+          <h2>{weather.data.name}, {weather.data.sys.country}</h2>
+          <span className="date">{toDateFunction()}</span>
+          <img 
+            src={`https://openweathermap.org/img/wn/${weather.data.weather[0].icon}@2x.png`} 
+            alt={weather.data.weather[0].description} 
+          />
+          <p>{Math.round(weather.data.main.temp)}°C</p>
+          <p>Vitesse du vent : {weather.data.wind.speed} m/s</p>
+        </div>
+      )}
+    </div>
+  );
 }
 export default Grp204WeatherApp;
