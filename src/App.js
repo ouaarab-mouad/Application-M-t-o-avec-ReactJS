@@ -22,27 +22,27 @@ const toDateFunction = () => {
 };
 const search = async (event) => {
 if (event.key === 'Enter') {
-event.preventDefault();
-setInput('');
-setWeather({ ...weather, loading: true });
-const url = 'https://api.openweathermap.org/data/2.5/weather';
-const api_key = 'f00c38e0279b7bc85480c3fe775d518c';
-await axios
-.get(url, {
-params: {
-q: input,
-units: 'metric',
-appid: api_key,
+    event.preventDefault();
+    setInput('');
+    setWeather({ ...weather, loading: true });
+    const url = 'https://api.openweathermap.org/data/2.5/weather';
+    const api_key = 'f00c38e0279b7bc85480c3fe775d518c';
+    await axios
+    .get(url, {
+    params: {
+    q: input,
+    units: 'metric',
+    appid: api_key,
 },
 })
 .then((res) => {
-setWeather({ data: res.data, loading: false, error: false });
-})
-.catch((error) => {
-setWeather({ ...weather, data: {}, error: true });
-setInput('');
-});
-}
+        setWeather({ data: res.data, loading: false, error: false });
+        })
+        .catch((error) => {
+        setWeather({ ...weather, data: {}, error: true });
+        setInput('');
+        });
+        }
 };
 return (
 <div className="App">
